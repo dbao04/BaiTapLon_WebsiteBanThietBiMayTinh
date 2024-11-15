@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập / Đăng Ký</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/">
+    <style>
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="top-header">
+        <div class="left">
+            <a href="#"><i class="fas fa-map-marker-alt"></i></a>
+        </div>
+        <div class="right">
+            <a href="#"><i class="fas fa-briefcase"></i> Shopee Mall</a>
+            <a href="#"><i class="fas fa-handshake"></i> Đối Tác</a>
+            <a href="#"><i class="fas fa-headphones-alt"></i> Hotline: 07879.55.888</a>
+            <a href="#"><i class="fas fa-newspaper"></i> Tin Khuyến Mãi</a>
+            <a href="../html/dangnhap.html"><i class="fas fa-user"></i> Đăng Nhập</a>
+        </div>
+    </div>
+    <div class="header">
+        <div class="header-left">
+            <a href="../html/trangchu.html"> 
+                <img src="../img/logo1.webp" alt="MYGEAR" class="company-logo-header">
+            </a>
+            <input type="text" placeholder="Nhập tên sản phẩm cần tìm....">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="header-right">
+            <a href="">
+                <i class="fas fa-tools icon" title="Xây dựng cấu hình"></i>
+                <span>Xây dựng cấu hình</span>
+            </a>
+            <a href="">
+                <i class="fas fa-box icon" title="Tra cứu đơn hàng"></i>
+                <span>Tra cứu đơn hàng</span>
+            </a>
+            <a href="">
+                <i class="fas fa-shopping-cart icon" title="Giỏ hàng"></i>
+                <span>Giỏ hàng</span>
+            </a>
+        </div>
+    </div>
+    <!-- Main content -->
+    <!-- Thay thế phần container đăng nhập/đăng ký cũ bằng code này -->
+<div class="auth-wrapper">
+    <!-- Form đăng nhập -->
+    <div class="auth-container" id="login-container">
+        <h2>Đăng Nhập</h2>
+        <div class="auth-form-group">
+            <label for="login-username">Tên Đăng Nhập</label>
+            <input type="text" id="login-username">
+        </div>
+        <div class="auth-form-group">
+            <label for="login-password">Mật Khẩu</label>
+            <input type="password" id="login-password">
+        </div>
+        <button class="auth-btn" onclick="login()">Đăng Nhập</button>
+        <div class="auth-toggle-link" onclick="toggleForm()">Chưa có tài khoản? Đăng Ký</div>
+        <div class="auth-toggle-link">
+            <a href="../html/trangchu.html" style="text-decoration: none; color: #007bff;">Quay lại trang chủ</a>
+        </div>
+    </div>
+
+    <!-- Form đăng ký -->
+    <div class="auth-container" id="register-container" style="display: none;">
+        <h2>Đăng Ký</h2>
+        <div class="auth-form-group">
+            <label for="register-fullname">Họ và Tên</label>
+            <input type="text" id="register-fullname">
+            <div class="error" id="error-fullname"></div>
+        </div>
+        <div class="auth-form-group">
+            <label for="register-contact">Số Điện Thoại/Email</label>
+            <input type="text" id="register-contact">
+            <div class="error" id="error-contact"></div>
+        </div>
+        <div class="auth-form-group">
+            <label for="register-address">Địa Chỉ</label>
+            <input type="text" id="register-address">
+            <div class="error" id="error-address"></div>
+        </div>
+        <div class="auth-form-group">
+            <label for="register-username">Tên Đăng Nhập</label>
+            <input type="text" id="register-username">
+            <div class="error" id="error-username"></div>
+        </div>
+        <div class="auth-form-group">
+            <label for="register-password">Mật Khẩu</label>
+            <input type="password" id="register-password">
+            <div class="error" id="error-password"></div>
+        </div>
+        <button class="auth-btn" onclick="register()">Đăng Ký</button>
+        <div class="auth-toggle-link" onclick="toggleForm()">Đã có tài khoản? Đăng Nhập</div>
+        <div class="auth-toggle-link">
+            <a href="../html/trangchu.html" style="text-decoration: none; color: #007bff;">Quay lại trang chủ</a>
+        </div>
+    </div>
+</div>
+    <script>
+        function toggleForm() {
+            const loginContainer = document.getElementById('login-container');
+            const registerContainer = document.getElementById('register-container');
+            if (loginContainer.style.display === 'none') {
+                loginContainer.style.display = 'block';
+                registerContainer.style.display = 'none';
+            } else {
+                loginContainer.style.display = 'none';
+                registerContainer.style.display = 'block';
+            }
+        }
+
+        function login() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            // Dummy login validation
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            if (userInfo && userInfo.username === username && userInfo.password === password) {
+                window.location.href = 'trangchu.html';
+            } else {
+                alert('Thông tin đăng nhập không đúng');
+            }
+        }
+
+        function register() {
+            const fullname = document.getElementById('register-fullname').value;
+            const contact = document.getElementById('register-contact').value;
+            const address = document.getElementById('register-address').value;
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+
+            let valid = true;
+
+            if (!fullname) {
+                document.getElementById('error-fullname').innerText = 'Yêu cầu nhập họ và tên';
+                valid = false;
+            } else {
+                document.getElementById('error-fullname').innerText = '';
+            }
+
+            if (!contact) {
+                document.getElementById('error-contact').innerText = 'Yêu cầu nhập số điện thoại/email';
+                valid = false;
+            } else {
+                document.getElementById('error-contact').innerText = '';
+            }
+
+            if (!address) {
+                document.getElementById('error-address').innerText = 'Yêu cầu nhập địa chỉ';
+                valid = false;
+            } else {
+                document.getElementById('error-address').innerText = '';
+            }
+
+            if (!username) {
+                document.getElementById('error-username').innerText = 'Yêu cầu nhập tên đăng nhập';
+                valid = false;
+            } else {
+                document.getElementById('error-username').innerText = '';
+            }
+
+            if (!password) {
+                document.getElementById('error-password').innerText = 'Yêu cầu nhập mật khẩu';
+                valid = false;
+            } else {
+                document.getElementById('error-password').innerText = '';
+            }
+
+            // Kiểm tra xem tên đăng nhập đã tồn tại
+            const existingUser = JSON.parse(localStorage.getItem('userInfo'));
+            if (existingUser && existingUser.username === username) {
+                document.getElementById('error-username').innerText = 'Tên đăng nhập đã tồn tại';
+                valid = false;
+            }
+
+            if (valid) {
+                // Lưu thông tin vào localStorage
+                const userInfo = {
+                    fullname,
+                    contact,
+                    address,
+                    username,
+                    password,
+                };
+
+                localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                alert('Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...');
+                toggleForm();
+                // Làm sạch dữ liệu nhập
+                document.getElementById('register-fullname').value = '';
+                document.getElementById('register-contact').value = '';
+                document.getElementById('register-address').value = '';
+                document.getElementById('register-username').value = '';
+                document.getElementById('register-password').value = '';
+            }
+        }
+    </script>
+    <!-- Footer HTML -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Thông tin liên hệ -->
+            <div class="footer-section">
+                <h3>THÔNG TIN LIÊN HỆ</h3>
+                <p>Cửa hàng: 8:30 - 20:00 Thứ 2 đến Thứ 7</p>
+                <p>Chủ nhật: 10:00 - 19:00</p>
+                <p>Bảo hành: 8:30 - 17:30 Thứ 2 đến Thứ 7</p>
+                <p>Địa chỉ: 76/17 Trần Bá Giao, Phường 5, Quận Gò Vấp, TP. Hồ Chí Minh </p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon youtube"><img src="../img/youtube.webp" alt="YouTube"></a>
+                    <a href="#" class="social-icon tiktok"><img src="../img/tiktok.png" alt="TikTok"></a>
+                    <a href="#" class="social-icon facebook"><img src="../img/facebook.jpg" alt="Facebook"></a>
+                    <a href="#" class="social-icon zalo"><img src="../img/zalo.png" alt="Zalo"></a>
+                    <a href="#" class="social-icon maps"><img src="../img/map.webp" alt="Google Maps"></a>
+                </div>
+                <div class="certification">
+                    <img src="../img/path-to-certification1.png" alt="Đã thông báo">
+                    <img src="../img/path-to-certification2.png" alt="DMCA Protected">
+                </div>
+            </div>
+
+            <!-- Về chúng tôi -->
+            <div class="footer-section">
+                <h3>VỀ CHÚNG TÔI</h3>
+                <ul>
+                    <li><a href="#">Liên hệ với chúng tôi</a></li>
+                    <li><a href="#">Giới thiệu công ty</a></li>
+                    <li><a href="#">Bán hàng doanh nghiệp</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Thông tin tuyển dụng</a></li>
+                    <li><a href="#">Tin tức</a></li>
+                    <li><a href="#">Nội quy cửa hàng</a></li>
+                    <li><a href="#">Chứng nhận đại lý Dell</a></li>
+                    <li><a href="#">Chứng nhận đại lý LG</a></li>
+                </ul>
+            </div>
+
+            <!-- Hỗ trợ khách hàng -->
+            <div class="footer-section">
+                <h3>HỖ TRỢ KHÁCH HÀNG</h3>
+                <ul>
+                    <li><a href="#">Gửi yêu cầu hỗ trợ</a></li>
+                    <li><a href="#">Truy vấn yêu cầu</a></li>
+                    <li><a href="#">Chính sách bán hàng</a></li>
+                    <li><a href="#">Chính sách chung</a></li>
+                    <li><a href="#">Dịch vụ khách hàng</a></li>
+                    <li><a href="#">Hướng dẫn mua hàng online</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Chính sách huỷ đơn</a></li>
+                </ul>
+            </div>
+
+            <!-- Giao hàng hóa tốc -->
+            <div class="footer-section">
+                <h3>GIAO HÀNG HÓA TỐC</h3>
+                <p>Đổi trả sản phẩm trong vòng 7 ngày</p>
+                <p>Chấp nhận nhiều hình thức thanh toán</p>
+                <div class="payment-methods">
+                    <img src="../img/visa.png" alt="Visa">
+                    <img src="../img/mastercard.webp" alt="Mastercard">
+                    <img src="../img/momo.png" alt="Momo">
+                    <img src="../img/vnpay.jpg" alt="VNPay">
+                </div>
+                <div class="contact-info">
+                    <h4>CỬA HÀNG:</h4>
+                    <p class="phone">0825.297.297</p>
+                    <h4>THƯƠNG MẠI ĐIỆN TỬ:</h4>
+                    <p class="phone">0859.241.204</p>
+                    <h4>BẢO HÀNH:</h4>
+                    <p class="phone">0825.297.297</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Info -->
+        <div class="company-info">
+            <img src="../img/logo.webp" alt="MYGEAR" class="company-logo">
+            <div class="company-details">
+                <h3>CÔNG TY TNHH DB COMPUTER</h3>
+                    <p>Mã số thuế doanh nghiệp: 241204 Giấy phép kinh doanh cấp ngày 26 tháng 10 năm 2021</p>
+                <p>Đăng ký tại phòng kinh doanh Sở Kế Hoạch & Đầu Tư thành phố Hồ Chí Minh</p>
+                <p>Email: info@mygear.vn Copyrights © 2021-2024 dbcomputer.vn. All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

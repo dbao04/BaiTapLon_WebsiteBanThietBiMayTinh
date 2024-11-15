@@ -1,0 +1,76 @@
+/* chitietsanpham.css */
+
+/* Bố cục cho phần chi tiết sản phẩm */
+.product-detail .product-content {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* Phần mô tả và thông số kỹ thuật */
+.product-description .description-content {
+    display: flex;
+    gap: 20px;
+}
+
+.product-image, .description-text {
+    flex: 1;
+}
+
+.product-info, .specifications {
+    flex: 1;
+}
+
+/* Ảnh chính và ảnh thumbnail */
+.product-image .main-image {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.thumbnail-images img {
+    width: 48px;
+    height: 48px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid transparent;
+}
+
+.thumbnail-images img:hover,
+.thumbnail-images img.selected {
+    border-color: #007bff;
+}
+
+/* Các chi tiết thêm */
+.info-box ul, .specifications ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.info-box ul li, .specifications ul li {
+    background: #e9ecef;
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.add-to-cart {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.quantity-control button {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+}
+.description-text img {
+    width: 100%;
+    border-radius: 8px;
+}
